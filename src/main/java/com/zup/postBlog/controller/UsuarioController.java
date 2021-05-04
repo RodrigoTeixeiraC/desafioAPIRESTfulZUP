@@ -53,6 +53,7 @@ public class UsuarioController {
 	@PostMapping("/{cpf}/novo/endereco")
 	public ResponseEntity<?> cadastrarEndereco(@Valid @RequestBody Endereco novoEndereco,
 			@PathVariable(value = "cpf") Long cpf) {
+		
 		Optional<Endereco> enderecoCriado = services.cadastrarEndereco(novoEndereco, cpf);
 		{
 			if (!enderecoCriado.isEmpty()) {

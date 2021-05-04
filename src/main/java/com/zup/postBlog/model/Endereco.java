@@ -40,7 +40,7 @@ public class Endereco extends EntityModel<Endereco> {
 	@NotBlank (message = "O campo cidade não pode estar vazio!")
 	private String estado;
 	
-	@NotNull (message = "O campo CEP não pode estar vazio!")
+	@NotBlank (message = "O campo CEP não pode estar vazio!")
 	private long cep;
 	
 	@ManyToOne
