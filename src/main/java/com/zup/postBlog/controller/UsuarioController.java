@@ -31,7 +31,7 @@ public class UsuarioController {
 	private UsuarioService services;
 
 	@Autowired
-	UsuarioRepository repository;
+	private UsuarioRepository repository;
 
 	@PostMapping("/novo")
 	public ResponseEntity<?> cadastrarUsuario(@Valid @RequestBody Usuario novoUsuario) {
@@ -47,11 +47,11 @@ public class UsuarioController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("Usuario já existente no sistema, tente outro Email ou CPF!");
 		}
-		
 	}
 
 	@PostMapping("/{cpf}/novo/endereco")
-	public ResponseEntity<?> cadastrarEndereco(@Valid @RequestBody Endereco novoEndereco,
+	public ResponseEntity<?> cadastrarEndereco(
+			@Valid @RequestBody Endereco novoEndereco,
 			@PathVariable(value = "cpf") Long cpf) {
 		
 		Optional<Endereco> enderecoCriado = services.cadastrarEndereco(novoEndereco, cpf);
@@ -87,7 +87,7 @@ public class UsuarioController {
 					enderecos.add(selfLink);
 				}
 				
-				Link selfLink = new Link("http://localhost:8080/postBlog/usuario/busca" + usuario.get().getCpf());
+				Link selfLink = new Link("http://localhost:8080/postBlog/usuario/busca/" + usuario.get().getCpf());
 				usuario.get().add(selfLink);
 				return ResponseEntity.status(200).body(repository.findByCpf(cpf));
 			}
